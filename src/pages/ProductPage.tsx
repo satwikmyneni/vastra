@@ -85,8 +85,6 @@ Hello, I'm interested in this product:
 Product: ${product.name}
 Price: ₹${discountPrice || price}
 Size: ${selectedSize || "Not Applicable"}
-
-
 Product Link: ${window.location.href}
     `;
 
