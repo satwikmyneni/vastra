@@ -86,7 +86,7 @@ Product: ${product.name}
 Price: ₹${discountPrice || price}
 Size: ${selectedSize || "Not Applicable"}
 
-// Image: ${imageUrl}
+
 Product Link: ${window.location.href}
     `;
 
