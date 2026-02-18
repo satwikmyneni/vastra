@@ -38,9 +38,9 @@ const Footer = ({ whatsappNumber, categories }: Props) => {
           <div>
             <h4 className="font-semibold text-sm uppercase tracking-wider mb-4">Visit Us</h4>
             <ul className="space-y-3">
-              <li className="flex items-start gap-2.5"><MapPin className="h-4 w-4 mt-0.5 text-gold shrink-0" /><span className="text-sm text-primary-foreground/60">123 Fashion Street, Silk Market, Mumbai 400001</span></li>
+              <li className="flex items-start gap-2.5"><MapPin className="h-4 w-4 mt-0.5 text-gold shrink-0" /><span className="text-sm text-primary-foreground/60">123 Fashion Street,  One Town, Vijayawada 520001</span></li>
               <li className="flex items-center gap-2.5"><Phone className="h-4 w-4 text-gold shrink-0" /><span className="text-sm text-primary-foreground/60">+91 98765 43210</span></li>
-              <li className="flex items-center gap-2.5"><Mail className="h-4 w-4 text-gold shrink-0" /><span className="text-sm text-primary-foreground/60">hello@vastra.in</span></li>
+              <li className="flex items-center gap-2.5"><Mail className="h-4 w-4 text-gold shrink-0" /><span className="text-sm text-primary-foreground/60">admin@vastra.in</span></li>
               <li>
                 <a
   href="https://wa.me/919876543210"
