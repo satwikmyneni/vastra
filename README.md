@@ -1,73 +1,59 @@
-# Welcome to your Lovable project
+Vastra – Premium Ethnic Fashion Boutique
 
-## Project info
+Vastra is a modern luxury ethnic fashion e-commerce platform built with React, TypeScript, and Supabase.
+It showcases curated bridal couture, festive collections, and premium handcrafted garments.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+✨ Features
 
-## How can I edit this code?
+🛍 Dynamic product catalog (Supabase backend)
 
-There are several ways of editing your application.
+🔎 Real-time search functionality
 
-**Use Lovable**
+❤️ Favorites system (local storage powered)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+📦 Category-based browsing
 
-Changes made via Lovable will be committed automatically to this repo.
+📱 Fully responsive design
 
-**Use your preferred IDE**
+💬 WhatsApp direct enquiry integration
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+🔗 SEO-ready Open Graph metadata
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+⚡ Built with modern React stack
 
-Follow these steps:
+🧱 Tech Stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Frontend
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+React + TypeScript
 
-# Step 3: Install the necessary dependencies.
-npm i
+Vite
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Tailwind CSS
 
-**Edit a file directly in GitHub**
+Framer Motion
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+React Query
 
-**Use GitHub Codespaces**
+Backend
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Supabase (PostgreSQL)
 
-## What technologies are used for this project?
+Supabase Storage (Image hosting)
 
-This project is built with:
+Deployment:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Netlify 
 
-## How can I deploy this project?
+GitHub 
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+📁 Project Structure
+src/
+ ├── components/
+ ├── pages/
+ ├── context/
+ ├── hooks/
+ ├── lib/
+ ├── integrations/
+ ├── assets/
+ └── types/
