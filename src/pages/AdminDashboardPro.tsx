@@ -121,118 +121,135 @@ export default function AdminDashboard() {
   };
 
   // 💾 Save or Update Product in Database
-  const handleSubmitProduct = async () => {
-    // Check if category is selected
-    if (!form.category_id) {
-      setError("Please select a category for the product.");
-      return;
-    }
+const handleSubmitProduct = async () => {
+  if (!form.category_id) {
+    setError("Please select a category for the product.");
+    return;
+  }
 
-    // Ensure images are uploaded and URLs are returned
-    const imageUrls = await uploadImages();
+  let imageUrls: string[] | null = null;
+
+  // Only upload images if new files selected
+  if (imageFiles.length > 0) {
+    imageUrls = await uploadImages();
+
     if (!imageUrls.length) {
-      console.error("No images uploaded.");
+      console.error("Image upload failed.");
       return;
     }
+  }
 
-    const payload = {
-      name: form.name,
-      slug: form.slug,
-      price: Number(form.price),
-      discount_price: form.discount_price
-        ? Number(form.discount_price)
-        : null,
-      description: form.description || null,
-      stock: form.stock ? Number(form.stock) : 0,
-      sizes: form.sizes
-        ? form.sizes.split(",").map((s) => s.trim())
-        : null,
-      category_id: form.category_id,
-      is_new: form.is_new,
-      is_sale: form.is_sale,
-      images:
-        imageUrls.length > 0
-          ? imageUrls
-          : editingProduct?.images || null,
-    };
+  const payload = {
+    name: form.name,
+    slug: form.slug,
+    price: Number(form.price),
+    discount_price: form.discount_price
+      ? Number(form.discount_price)
+      : null,
+    description: form.description || null,
+    stock: form.stock ? Number(form.stock) : 0,
+    sizes: form.sizes
+      ? form.sizes.split(",").map((s) => s.trim())
+      : null,
+    category_id: form.category_id,
+    is_new: form.is_new,
+    is_sale: form.is_sale,
 
-    try {
-      if (editingProduct) {
-        // Update existing product
-        const { error } = await supabase
-          .from("products")
-          .update(payload)
-          .eq("id", editingProduct.id);
-
-        if (error) {
-          console.error("Error updating product:", error);
-          return;
-        }
-      } else {
-        // Insert new product
-        const { error } = await supabase.from("products").insert([payload]);
-
-        if (error) {
-          console.error("Error inserting product:", error);
-          return;
-        }
-      }
-
-      resetForm();
-      fetchProducts();
-      setError(null); // Clear error after successful submission
-    } catch (error) {
-      console.error("Error saving product:", error);
-    }
+    // 🔥 Important Fix
+    images: imageUrls
+      ? imageUrls
+      : editingProduct?.images || null,
   };
+
+  try {
+    if (editingProduct) {
+      const { error } = await supabase
+        .from("products")
+        .update(payload)
+        .eq("id", editingProduct.id);
+
+      if (error) {
+        console.error("Error updating product:", error);
+        return;
+      }
+    } else {
+      const { error } = await supabase
+        .from("products")
+        .insert([payload]);
+
+      if (error) {
+        console.error("Error inserting product:", error);
+        return;
+      }
+    }
+
+    resetForm();
+    fetchProducts();
+    setError(null);
+  } catch (error) {
+    console.error("Error saving product:", error);
+  }
+};
+
 
   // 💾 Save or Update Category in Database
   const handleSubmitCategory = async () => {
-    if (!categoryForm.name.trim()) {
-      alert("Category name is required");
+  if (!categoryForm.name.trim()) {
+    alert("Category name is required");
+    return;
+  }
+
+  let imageUrl: string | null = editingCategory?.image || null;
+
+  // Only upload if new file selected
+  if (categoryImageFile) {
+    const uploadedUrl = await uploadCategoryImage();
+
+    if (!uploadedUrl) {
+      console.error("Category image upload failed");
       return;
     }
 
-    let imageUrl = editingCategory?.image || null;
-    if (categoryImageFile) {
-      imageUrl = await uploadCategoryImage();
-    }
+    imageUrl = uploadedUrl;
+  }
 
-    const payload = {
-      name: categoryForm.name,
-      slug: categoryForm.slug || generateSlug(categoryForm.name),
-      description: categoryForm.description || null,
-      image: imageUrl,
-    };
-
-    try {
-      if (editingCategory) {
-        // Update existing category
-        const { error } = await supabase
-          .from("categories")
-          .update(payload)
-          .eq("id", editingCategory.id);
-
-        if (error) {
-          console.error("Error updating category:", error);
-          return;
-        }
-      } else {
-        // Insert new category
-        const { error } = await supabase.from("categories").insert([payload]);
-
-        if (error) {
-          console.error("Error inserting category:", error);
-          return;
-        }
-      }
-
-      resetCategoryForm();
-      fetchCategories();
-    } catch (error) {
-      console.error("Error saving category:", error);
-    }
+  const payload = {
+    name: categoryForm.name,
+    slug:
+      categoryForm.slug || generateSlug(categoryForm.name),
+    description: categoryForm.description || null,
+    image: imageUrl,
   };
+
+  try {
+    if (editingCategory) {
+      const { error } = await supabase
+        .from("categories")
+        .update(payload)
+        .eq("id", editingCategory.id);
+
+      if (error) {
+        console.error("Error updating category:", error);
+        return;
+      }
+    } else {
+      const { error } = await supabase
+        .from("categories")
+        .insert([payload]);
+
+      if (error) {
+        console.error("Error inserting category:", error);
+        return;
+      }
+    }
+
+    resetCategoryForm();
+    fetchCategories();
+  } catch (error) {
+    console.error("Error saving category:", error);
+  }
+};
+
 
   const resetForm = () => {
     setForm({
